@@ -2,6 +2,8 @@
 # Variables used during builds.
 
 variables:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
+  DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
   buildConfiguration: 'Release' 
   azureSubscriptionEndpoint: 'docker-build'
   azureContainerRegistry: 'healthplatformregistry.azurecr.io'

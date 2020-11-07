@@ -1,7 +1,6 @@
 # DESCRIPTION: 	
 # Builds, tests, and packages the solution for all PR requests.	
 
-name: pr$(system.pullRequest.pullRequestNumber)-$(Date:yyyyMMdd)$(Rev:-r)
 trigger: none
 
 variables:
@@ -29,7 +28,8 @@ stages:
 
 - stage: DockerBuild  
   displayName: 'Build images'
-  dependsOn: []
+  dependsOn:
+  - BuildUnitTests
   jobs:
   - template: ./jobs/docker-build-all.yml
     parameters: 
