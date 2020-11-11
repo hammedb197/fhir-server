@@ -19,10 +19,12 @@ services:
     depends_on:
       - sql
   sql:
-    image: "mcr.microsoft.com/mssql/server"
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
+    image: "microsoft/mssql-server-linux"
     environment:
       SA_PASSWORD: ${SAPASSWORD}
       ACCEPT_EULA: "Y"
-
+    healthcheck:
+        test: ["CMD", "/opt/mssql-tools/bin/sqlcmd","-U sa -P ${SAPASSWORD} -Q 'SELECT * FROM INFORMATION_SCHEMA.TABLES'"]
+        interval: 10s
+        timeout: 10s
+        retries: 6
